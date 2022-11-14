@@ -31,7 +31,7 @@ var moon=new Planet("moon",20,20,10,10,30);
 mVx=moon.velocity;
 var planets =[mars,moon];
 
-//requestAnimationFrame(motion);
+requestAnimationFrame(motion);
 //physics(mars.mass,mars.pos_x,mars.pos_y,moon.pos_x,moon.pos_y,moon.velocity);
 
 
