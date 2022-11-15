@@ -26,13 +26,13 @@ constructor(name,pos_x,pos_y,mass,radius,velocity){
 
     
 }
-var mars=new Planet("mars",75,75,10,10,0.1);
-var moon=new Planet("moon",20,20,10,10,30);
+var mars=new Planet("mars",75,75,10**9,10,0.1);
+var moon=new Planet("moon",20,20,10**9,10,0.9);
 mVx=moon.velocity;
 var planets =[mars,moon];
 
 requestAnimationFrame(motion);
-//physics(mars.mass,mars.pos_x,mars.pos_y,moon.pos_x,moon.pos_y,moon.velocity);
+//physics(mars.mass,moon.mass,mars.pos_x,mars.pos_y,moon.pos_x,moon.pos_y,moon.velocity);
 
 
 
@@ -44,9 +44,9 @@ var collision1 =collision(distance(moon,mars),moon,mars);
 //    planets[0].velocity=planets[0].velocity*1*Math.sin(30)+0.5;
 //    planets[1].velocity=planets[1].velocity*-1*Math.cos(30)+0.5;
 //}
-physics(mars.mass,mars.pos_x,mars.pos_y,moon.pos_x,moon.pos_y,moon.velocity);
+physics(mars.mass,moon.mass,mars.pos_x,mars.pos_y,moon.pos_x,moon.pos_y,moon.velocity);
     
-planets[0].pos_x+=planets[0].velocity;
+//planets[0].pos_x+=planets[0].velocity;
 //planets[0].pos_y+=planets[0].velocity;
 
 //planets[1].pos_x+=planets[1].velocity*Math.cos(30);
@@ -86,7 +86,7 @@ function draw() {
 }
 
 //physics under the hood
-function physics(mass,x1,y1,x2,y2,velocity) {
+function physics(mass1,mass2,x1,y1,x2,y2,velocity) {
 //mass- mass of the gravity source
 //velocity- is the velocity of the other body, the one obiting another
 
@@ -94,9 +94,9 @@ function physics(mass,x1,y1,x2,y2,velocity) {
 point_x =x1-x2;
 point_y =y1-y2;
 r = Math.sqrt(point_x*point_x+point_y*point_y);
-F_G = 6.674*10**-11 * mass * 1 / r^2;
+F_G = 6.674*10**-11 * mass1 *mass2* 1 / r**2;
     
-acc =F_G/mass;
+acc =F_G/mass2;
 newV+=acc;
 nom_x=(point_x/r)*newV;
 nom_y=(point_y/r)*newV;
